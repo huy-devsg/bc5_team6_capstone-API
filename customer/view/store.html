@@ -68,7 +68,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary btnClear"
                                             data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btnPurchase">Payment</button>
+                                        <button type="button" class="btn btnPurchase" onclick="payment()">Payment</button>
                                     </div>
                                 </div>
                             </div>
@@ -245,6 +245,17 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
         integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
         </script>
+
+    <!-- script cart -->
+
+    <script>
+        const payment =() =>
+        {
+            localStorage.removeItem('cartList');
+            alert('Thanh toán thành công');
+            location.reload();
+        } 
+    </script>
 
     <!-- Axios JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"

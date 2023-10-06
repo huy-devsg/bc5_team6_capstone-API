@@ -41,4 +41,5 @@ class Cart {
   getCartItems() {
     return this.cartItems;
   }
+  payment() {}
 }
