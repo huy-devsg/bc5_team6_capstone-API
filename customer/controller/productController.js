@@ -1,12 +1,10 @@
 const getElement = (selector) => document.querySelector(selector);
-
 const getElementAll = (selector) => document.querySelectorAll(selector);
-
 const renderProductList = (productList) => {
-    let stringHTML = '';
+  let stringHTML = "";
 
-    productList.forEach((product) => {
-        stringHTML += `
+  productList.forEach((product) => {
+    stringHTML += `
         <div class="product-items__detail col-lg-3 col-md-6 col-sm-12 mt-5">
         <div class="card">
             <div class="card-body">
@@ -22,25 +20,82 @@ const renderProductList = (productList) => {
         </div>
     </div>   
         `;
-    });
+  });
 
-    getElement('#productList').innerHTML = stringHTML;
+  getElement("#productList").innerHTML = stringHTML;
 };
 
-const renderCart = (cart) => {
-    let stringHTML = '';
-    let number = 1;
+const cartList = JSON.parse(localStorage.getItem("cartList")) || [];
+const renderCart = (cartList) => {
+  if (cartList) {
+    getElement(".btnPurchase").style.display = "inline-block";
+    getElement(".modal-body").innerHTML = `
+            <table class="table table-striped table-hover">
+                <thead id="cardContent">
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Pricing</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody id="cartItemList">
+                </tbody>
+                <tbody id="totalMoney">
+                    <tr>
+                        <td>&emsp;</td>
+                        <td>&emsp;</td>
+                        <td>&emsp;</td>
+                        <td>&emsp;</td>
+                        <td id="td__totalMoney">
+                        
+                        </td>
+                    </tr>
+                </tbody>
+            </table>`;
 
-    cart.forEach((cartItem) => {
-        stringHTML += `
-        <tr>
+    let stringHTML = "";
+    let number = 1;
+    let totalMoney = 0;
+    let totalQuantity = 0;
+    cartList.forEach((cartItem) => {
+      stringHTML += `
+          <tr>
             <th scope="row">${number++}</th>
-                <td>${cartItem.product.name}</td>
-                <td>${cartItem.quantity}</td>
-                <td>${cartItem.product.price}</td></td>
-                <td>${cartItem.product.price * cartItem.quantity}</td>
-        </tr>
+            <td>${cartItem.product.name}</td>
+            <td>
+              <button class='btn-changeQuantity' onclick="decrementQuantity(${
+                cartItem.product.id
+              })"><</button>
+              ${cartItem.quantity}
+              <button class='btn-changeQuantity' onclick="incrementQuantity(${
+                cartItem.product.id
+              })">></button>
+            </td>
+            <td>$ ${cartItem.product.price}</td>
+            <td>$ ${cartItem.product.price * cartItem.quantity}</td>
+          </tr>
         `;
+      totalQuantity += cartItem.quantity;
+      totalMoney += cartItem.product.price * cartItem.quantity;
     });
-    getElement('#cartItemList').innerHTML = stringHTML;
-}
+    getElement("#cartItemList").innerHTML = stringHTML;
+    getElement(".btnCart").setAttribute("data-quantity", totalQuantity);
+    if (totalQuantity === 0) {
+      getElement(".modal-body").innerHTML = "Chưa có sản phẩm trong giỏ hàng.";
+      getElement(".btnPurchase").style.display = "none";
+    } else if (totalQuantity > 99) {
+      getElement(".btnCart").setAttribute("data-quantity", "99+");
+      getElement("#td__totalMoney").innerHTML = "$ " + totalMoney;
+    } else {
+      getElement("#td__totalMoney").innerHTML = "$ " + totalMoney;
+    }
+  } else {
+    getElement(".modal-body").innerHTML = "Chưa có sản phẩm trong giỏ hàng.";
+    getElement(".btnPurchase").style.display = "none";
+  }
+};
+const decrementQuantity = (productId) => addProductToCart(productId, -1);
+const incrementQuantity = (productId) => addProductToCart(productId, +1);
+renderCart(cartList);

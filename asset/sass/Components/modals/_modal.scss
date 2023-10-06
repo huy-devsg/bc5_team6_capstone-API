@@ -20,3 +20,19 @@
         }
     }
 }
+
+#cartModal
+{
+    --bs-modal-width : 700px;
+    z-index: 999;
+    & .modal-dialog-custom
+    {
+        margin : 0 auto;
+    }
+
+}
+.modal-backdrop
+    {
+        --bs-backdrop-zindex : 1;
+
+    }

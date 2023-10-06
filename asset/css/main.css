@@ -1,3 +1,26 @@
+.btnCart {
+  position: relative;
+}
+.btnCart::before {
+  content: attr(data-quantity);
+  color: #fff;
+  font-size: 12px;
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  right: 0;
+  top: -5px;
+  background-color: red;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.btn-changeQuantity {
+  border: solid 1px #ccc;
+  border-radius: 50%;
+  padding: 0 7px;
+}
+
 body {
   font-family: "Poppins", sans-serif, sans-serif;
 }
@@ -74,8 +97,24 @@ body a {
   padding: 0.7rem 0.75rem;
 }
 
+#cartModal {
+  --bs-modal-width: 700px;
+  z-index: 999;
+}
+#cartModal .modal-dialog-custom {
+  margin: 0 auto;
+}
+
+.modal-backdrop {
+  --bs-backdrop-zindex: 1;
+}
+
 header .navbar {
   border-bottom: 1px solid #919294;
+  position: fixed;
+  z-index: 2;
+  width: 100%;
+  top: 0;
 }
 header .navbar .header-main {
   padding: 10px 0;
@@ -106,6 +145,10 @@ header .navbar .header-main__icon button i {
   text-decoration: none;
   color: #fff;
   font-size: 1.5rem;
+}
+header .navbar .header-main__icon .modal-dialog-custom {
+  margin-right: 0;
+  margin-left: auto;
 }
 header .navbar .header-main__icon .modal-footer .btnPurchase {
   background-color: #fd7e14;
