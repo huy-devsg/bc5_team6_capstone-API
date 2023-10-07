@@ -1,4 +1,4 @@
-.btnCart
+button.btnCart
 {
     position: relative;
     &::before
@@ -17,9 +17,10 @@
 
     }
 }
-.btn-changeQuantity
+button.btn-changeQuantity
 {
     border: solid 1px #ccc;
     border-radius: 50%;
+    color: black;
     padding: 0 7px;
 }

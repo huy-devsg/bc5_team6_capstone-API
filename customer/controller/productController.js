@@ -26,18 +26,21 @@ const renderProductList = (productList) => {
 };
 
 const cartList = JSON.parse(localStorage.getItem("cartList")) || [];
+
 const renderCart = (cartList) => {
   if (cartList) {
     getElement(".btnPurchase").style.display = "inline-block";
     getElement(".modal-body").innerHTML = `
             <table class="table table-striped table-hover">
-                <thead id="cardContent">
+                <thead id="cartContent">
                     <tr>
                         <th scope="col">No.</th>
                         <th scope="col">Product Name</th>
-                        <th scope="col">Quantity</th>
                         <th scope="col">Pricing</th>
+                        <th scope="col">Quantity</th>
                         <th scope="col">Total</th>
+                        <th scope="col" style="text-align:center;"><i class="fa-solid fa-gear"></i></th>
+
                     </tr>
                 </thead>
                 <tbody id="cartItemList">
@@ -49,7 +52,8 @@ const renderCart = (cartList) => {
                         <td>&emsp;</td>
                         <td>&emsp;</td>
                         <td id="td__totalMoney">
-                        
+                        <td>&emsp;</td>
+
                         </td>
                     </tr>
                 </tbody>
@@ -64,17 +68,29 @@ const renderCart = (cartList) => {
           <tr>
             <th scope="row">${number++}</th>
             <td>${cartItem.product.name}</td>
+            <td>$ ${cartItem.product.price}</td>
+
             <td>
               <button class='btn-changeQuantity' onclick="decrementQuantity(${
                 cartItem.product.id
-              })"><</button>
+              })">
+                <
+              </button>
               ${cartItem.quantity}
               <button class='btn-changeQuantity' onclick="incrementQuantity(${
                 cartItem.product.id
-              })">></button>
+              })">
+                >
+              </button>
             </td>
-            <td>$ ${cartItem.product.price}</td>
             <td>$ ${cartItem.product.price * cartItem.quantity}</td>
+            <td  style="text-align:center;">
+            <button class='btn-changeQuantity' onclick="removeProduct(${
+              cartItem.product.id
+            })">
+            <i class="fa-solid fa-xmark"style =" color:#000"></i>
+            </button>
+            </td>
           </tr>
         `;
       totalQuantity += cartItem.quantity;
@@ -98,4 +114,5 @@ const renderCart = (cartList) => {
 };
 const decrementQuantity = (productId) => addProductToCart(productId, -1);
 const incrementQuantity = (productId) => addProductToCart(productId, +1);
+const removeProduct = (productId) => cart.removeProduct(productId);
 renderCart(cartList);

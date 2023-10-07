@@ -4,42 +4,44 @@ class Cart {
   }
 
   saveCart() {
-    localStorage.setItem("cartList", JSON.stringify(this.cartItems));
+    return localStorage.setItem("cartList", JSON.stringify(this.cartItems));
   }
 
   addProduct(product, quantity) {
-    const checkAvailable = this.cartItems.find(
-      (item) => item.product.id === product.id
-    );
-    if (checkAvailable) {
-      checkAvailable.quantity += quantity;
-      this.saveCart();
-      if (checkAvailable.quantity === 0) {
+    const check = this.cartItems.find((item) => item.product.id === product.id);
+    if (check) {
+      check.quantity += quantity;
+      console.log("check.quantity: ", check.quantity);
+      if (check.quantity <= 0) {
         this.removeProduct(product.id);
-        this.saveCart();
+        this.cartItems = check;
       }
+      this.cartItems = check;
     } else {
       const newProduct = new CartItem(product, quantity);
       this.cartItems.push(newProduct);
-      this.saveCart();
     }
   }
 
-  removeProduct(productId) {
+  removeProduct(productID) {
     this.cartItems = this.cartItems.filter(
-      (item) => item.product.id !== productId
+      (item) => item.product.id !== productID
     );
+    // let index = this.cartItems.indexOf(productID);
+    // console.log("index: ", index);
+    this.cartItems.splice(this.cartItems, 1);
+    this.saveCart();
+    renderCart(this.cartItems);
   }
 
-  getTotalPrice() {
-    return this.cartItems.reduce(
-      (total, item) => total + item.product.price * item.quantity,
-      0
-    );
-  }
+  //   getTotalPrice() {
+  //     return this.cartItems.reduce(
+  //       (total, item) => total + item.product.price * item.quantity,
+  //       0
+  //     );
+  //   }
 
-  getCartItems() {
-    return this.cartItems;
-  }
-  payment() {}
+  //   getCartItems() {
+  //     return this.cartItems;
+  //   }
 }

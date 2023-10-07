@@ -31,12 +31,8 @@ const filterProductByType = () => {
 };
 
 const cart = new Cart();
-console.log(cart);
-
 window.addProductToCart = (id, _quantity) => {
   let quantity = _quantity || 1;
-  console.log("addProductToCart quantity: ", quantity);
-  console.log("addProductToCart id: ", id);
   getProductById(id)
     .then((res) => {
       let product = res.data;
@@ -44,6 +40,6 @@ window.addProductToCart = (id, _quantity) => {
       renderCart(cart.cartItems);
     })
     .catch((err) => {
-      console.log("addProductToCart Error: ", err);
+      console.log(err);
     });
 };

@@ -1,7 +1,7 @@
-.btnCart {
+button.btnCart {
   position: relative;
 }
-.btnCart::before {
+button.btnCart::before {
   content: attr(data-quantity);
   color: #fff;
   font-size: 12px;
@@ -15,9 +15,10 @@
   position: absolute;
 }
 
-.btn-changeQuantity {
+button.btn-changeQuantity {
   border: solid 1px #ccc;
   border-radius: 50%;
+  color: black;
   padding: 0 7px;
 }
 
