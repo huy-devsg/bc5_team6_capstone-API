@@ -8,40 +8,39 @@ class Cart {
   }
 
   addProduct(product, quantity) {
-    const check = this.cartItems.find((item) => item.product.id === product.id);
-    if (check) {
-      check.quantity += quantity;
-      console.log("check.quantity: ", check.quantity);
-      if (check.quantity <= 0) {
+    const checkAvailable = this.cartItems.find(
+      (item) => item.product.id === product.id
+    );
+    if (checkAvailable) {
+      checkAvailable.quantity += quantity;
+      if (checkAvailable.quantity <= 0) {
         this.removeProduct(product.id);
-        this.cartItems = check;
       }
-      this.cartItems = check;
     } else {
       const newProduct = new CartItem(product, quantity);
       this.cartItems.push(newProduct);
     }
+
+    this.saveCart(); // Cập nhật local storage
+    renderCart(this.cartItems);
   }
 
   removeProduct(productID) {
     this.cartItems = this.cartItems.filter(
-      (item) => item.product.id !== productID
+      (item) => item.product.id !== productID.toString()
     );
-    // let index = this.cartItems.indexOf(productID);
-    // console.log("index: ", index);
-    this.cartItems.splice(this.cartItems, 1);
     this.saveCart();
     renderCart(this.cartItems);
   }
 
-  //   getTotalPrice() {
-  //     return this.cartItems.reduce(
-  //       (total, item) => total + item.product.price * item.quantity,
-  //       0
-  //     );
-  //   }
+  getTotalPrice() {
+    return this.cartItems.reduce(
+      (total, item) => total + item.product.price * item.quantity,
+      0
+    );
+  }
 
-  //   getCartItems() {
-  //     return this.cartItems;
-  //   }
+  getCartItems() {
+    return this.cartItems;
+  }
 }

@@ -15,7 +15,7 @@ const renderProductList = (productList) => {
                 class="card-img-top" alt="${product.name}">
             <div class="card-body">
                 <span class="card-text">From $ ${product.price}</span>
-                <a href="#" class="btn btn-primary" onclick="addProductToCart(${product.id})">Buy</a>
+                <span class="btn btn-primary" onclick="addProductToCart(${product.id})">Buy</span>
             </div>
         </div>
     </div>   
@@ -85,7 +85,7 @@ const renderCart = (cartList) => {
             </td>
             <td>$ ${cartItem.product.price * cartItem.quantity}</td>
             <td  style="text-align:center;">
-            <button class='btn-changeQuantity' onclick="removeProduct(${
+            <button class='btn-changeQuantity' onclick="remove(${
               cartItem.product.id
             })">
             <i class="fa-solid fa-xmark"style =" color:#000"></i>
@@ -114,5 +114,5 @@ const renderCart = (cartList) => {
 };
 const decrementQuantity = (productId) => addProductToCart(productId, -1);
 const incrementQuantity = (productId) => addProductToCart(productId, +1);
-const removeProduct = (productId) => cart.removeProduct(productId);
+const remove = (productId) => cart.removeProduct(productId);
 renderCart(cartList);
