@@ -223,24 +223,24 @@ header .navbar .header-main__icon .modal-footer .btnPurchase {
   transition: all 0.5s;
 }
 
-.content-wrap {
+#content-wrap {
   margin-top: 100px;
 }
-.content-wrap .phoneBanner {
+#content-wrap .phoneBanner {
   background-color: rgba(29, 38, 113, 0.7);
 }
-.content-wrap .phoneBanner .btn-banner {
+#content-wrap .phoneBanner .btn-banner {
   border: 0;
   background-color: #294d5c;
   color: rgba(255, 255, 255, 0.85);
   padding: 10px;
   transition: all 0.15s;
 }
-.content-wrap .phoneBanner .btn-banner:hover {
+#content-wrap .phoneBanner .btn-banner:hover {
   background-color: #fff;
   color: #212529;
 }
-.content-wrap .product__list {
+#content-wrap .product__list {
   display: flex;
 }
 
