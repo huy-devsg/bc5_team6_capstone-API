@@ -1,20 +1,24 @@
-.phoneBanner {
-    background-color: rgba(29, 38, 113, 0.7);
-    & .btn-banner {
-        border: 0;
-        background-color: #294d5c;
-        color: rgba(255, 255, 255, 0.85);
-        padding: 10px;
-        transition: all 0.15s;
-
-        &:hover {
-            background-color: $color-white;
-            color: #212529;
+.content-wrap
+{
+    margin-top: 100px;
+    .phoneBanner {
+        background-color: rgba(29, 38, 113, 0.7);
+        & .btn-banner {
+            border: 0;
+            background-color: #294d5c;
+            color: rgba(255, 255, 255, 0.85);
+            padding: 10px;
+            transition: all 0.15s;
+    
+            &:hover {
+                background-color: $color-white;
+                color: #212529;
+            }
         }
+    
     }
-
-}
-
-.product__list {
-    display: flex;
+    
+    .product__list {
+        display: flex;
+    }
 }
